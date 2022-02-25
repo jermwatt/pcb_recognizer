@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  vim:
+    image: pcb_recognizer_app
+    tty: true
+    build:
+      context: ../apps/pcb_recognizer_app
+      dockerfile: Dockerfile
+    container_name: pcb_recognizer_app
+    user: root
+    environment:
+      - DOCKER_USER=$USER
+    volumes:
+      - ../apps/pcb_recognizer_app/app:/home/
+    restart: unless-stopped
+    networks:
+      pcb_recognizer_network_app:
+        ipv4_address: 11.2.0.3
+
+networks:
+  pcb_recognizer_network_app:
+    external: true
